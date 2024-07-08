@@ -1,11 +1,11 @@
 from calculator import Calculator
 
 
-def working_with_calculator(expression: str) -> float:
+def main(expression: str) -> str:
     """
     Функция производит расчет запроса пользователя.
     Принимает строку выражения в формате 'число : оператор : число'
-    Возвращает результат выражение в виде числа
+    Возвращает результат выражение в виде строки
     """
 
     result_expression = expression.split()  # Разбиваем строку в список
@@ -27,33 +27,26 @@ def working_with_calculator(expression: str) -> float:
     cal = Calculator()
 
     if operator == '+':
-        return cal.add(num1, num2)
+        return f'Результат: {cal.add(num1, num2)}'
     elif operator == '-':
-        return cal.sub(num1, num2)
+        return f'Результат: {cal.sub(num1, num2)}'
     elif operator == '*':
-        return cal.mul(num1, num2)
+        return f'Результат: {cal.mul(num1, num2)}'
     elif operator == '/':
-        return cal.div(num1, num2)
+        return f'Результат: {cal.div(num1, num2)}'
+
     raise ValueError('Введенный оператор явялется некорректным! \nДопускаются операторы: +, -, /, *')
 
 
-def main() -> None:
-    """
-    Основаная функция
-    Принимает запрос пользователя и выдает ответ
-    """
-    try:
-        user = input('\nВведите данные для расчета в формате (number_one operator number_two): ')
-        print(f'Результат: {working_with_calculator(user)}')
-
-    except ValueError as error:
-        print(f'Ошибка: {error}')
-
-
 if __name__ == '__main__':
+
     print('Добро пожаловать в калькулятор 1.0 ^_^')
-    # В тз указанно, что при срабатывание ошибки нужно завершать программу
-    # Для более удобного тестирование зациклил функцию
-    # Прошу меня не ругать :)
+
     while True:
-        main()
+        try:
+            user = input('\nВведите данные для расчета в формате (number_one operator number_two): ')
+            result = main(user)
+            print(result)
+
+        except ValueError as error:
+            print(f'Ошибка: {error}')
